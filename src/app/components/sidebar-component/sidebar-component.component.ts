@@ -12,6 +12,14 @@ export class SidebarComponentComponent {
     private navigation : Router) {
   }
 
+  public navigateToCategory( category: string) {
+    this.navigation.navigate(['/shop'], {
+      queryParams: {
+        category: category
+      },
+    });
+  }
+
   public goToHome() {
     this.navigation.navigate(['']);
   }

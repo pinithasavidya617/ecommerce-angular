@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss']
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.scss']
 })
-export class ShopComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
 
   products = [
     {
@@ -82,23 +82,18 @@ export class ShopComponent implements OnInit {
       category: 'fashion',
     }
   ];
-  displayProducts = this.products
+  public product: any = {}
 
-  constructor( private route: ActivatedRoute, private navigation: Router ) {
+  constructor(private route: ActivatedRoute) {
+
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const category = params['category'];
-      if (category) {
-        this.displayProducts = this.products.filter(item => item.category === category);
-      } else {
-        this.displayProducts = this.products;
-      }
-    })
-  }
-
-  public navigateToProduct(id: number) {
-    this.navigation.navigate(['/shop/product', 'furniture',id]);
+    const productId = this.route.snapshot.params['id'];
+    console.log(this.route.snapshot.params);
+    if (productId) {
+      this.product = this.products.filter((p) => p.id.toString() === productId)[0];
+      console.log(this.product);
+    }
   }
 }

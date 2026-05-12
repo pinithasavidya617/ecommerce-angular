@@ -59,6 +59,7 @@
     </button>
 
     <img
+      (click)="navigateToProduct(product.id)"
       [src]="product.image"
       [alt]="product.name"
     >
