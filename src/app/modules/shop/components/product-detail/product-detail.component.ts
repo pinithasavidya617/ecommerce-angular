@@ -88,6 +88,8 @@ export class ProductDetailComponent implements OnInit {
 
   }
 
+  //Path parameters
+
   ngOnInit() {
     const productId = this.route.snapshot.params['id'];
     console.log(this.route.snapshot.params);

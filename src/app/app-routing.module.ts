@@ -8,7 +8,7 @@ import {ContactUsComponent} from "./components/contact-us/contact-us.component";
 
 const routes: Routes = [
   { path :'' , component : DashboardComponent},
-  { path :'shop' , loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule) },
+  { path :'shop' , loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule) },//path to a module
   { path :'deals' , component : DealsComponent},
   { path :'new-arrivals' , component : NewArrivalsComponent},
   { path :'best-sellers' , component : BestSellersComponent},

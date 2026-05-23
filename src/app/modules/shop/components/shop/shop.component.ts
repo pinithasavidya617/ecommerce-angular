@@ -99,6 +99,8 @@ export class ShopComponent implements OnInit {
   }
 
   public navigateToProduct(id: number) {
-    this.navigation.navigate(['/shop/product', 'furniture',id]);
+    // this.navigation.navigate(['/shop/product', 'furniture',id]);
+    this.navigation.navigate(['/shop/product',id]);
+
   }
 }
