@@ -17,6 +17,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 89.99,
       tag: 'NEW',
       category: 'electronic',
+      rating: 4.5,
     },
     {
       id: 2,
@@ -26,6 +27,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 199.99,
       tag: 'SALE',
       category: 'electronic',
+      rating: 1.5,
     },
     {
       id: 3,
@@ -35,6 +37,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 699.99,
       tag: 'HOT',
       category: 'electronic',
+      rating: 3.5,
     },
     {
       id: 4,
@@ -44,6 +47,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 59.99,
       tag: '',
       category: 'fashion',
+      rating: 2.5,
     },
     {
       id: 5,
@@ -53,6 +57,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 79.99,
       tag: '',
       category: 'fashion',
+      rating: 5,
     },
     {
       id: 6,
@@ -62,6 +67,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 49.99,
       tag: '',
       category: 'cosmetic',
+      rating: 4.5,
     },
     {
       id: 7,
@@ -71,6 +77,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 69.99,
       tag: '',
       category: 'electronic',
+      rating: 2.5,
     },
     {
       id: 8,
@@ -80,6 +87,7 @@ export class ShopComponent implements OnInit {
       oldPrice: 29.99,
       tag: '',
       category: 'fashion',
+      rating: 3.5,
     }
   ];
   displayProducts = this.products
@@ -89,12 +97,23 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
+      console.log(params);
       const category = params['category'];
-      if (category) {
-        this.displayProducts = this.products.filter(item => item.category === category);
-      } else {
-        this.displayProducts = this.products;
+      const rating = params['rating'];
+
+      const filter = {
+        category: category,
+        rating: rating
       }
+
+      this.displayProducts = this.products.filter(
+        item => {
+          return (
+            (filter.category === undefined || item.category === filter.category) &&
+            (filter.rating === undefined || item.rating.toString() === filter.rating)
+          );
+        }
+      );
     })
   }
 
