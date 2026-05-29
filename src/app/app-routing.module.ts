@@ -13,6 +13,7 @@ const routes: Routes = [
   { path :'new-arrivals' , component : NewArrivalsComponent},
   { path :'best-sellers' , component : BestSellersComponent},
   { path :'contact-us' , component : ContactUsComponent},
+  {path: '**', redirectTo:''} //wildcard
 ];
 
 @NgModule({

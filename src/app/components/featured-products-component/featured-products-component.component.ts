@@ -1,32 +1,19 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Product, ProductService} from "../../product.service";
 
 @Component({
   selector: 'app-featured-products-component',
   templateUrl: './featured-products-component.component.html',
   styleUrls: ['./featured-products-component.component.scss']
 })
-export class FeaturedProductsComponentComponent {
+export class FeaturedProductsComponentComponent implements OnInit {
 
-  products = [
-    {
-      name: 'Wireless Headphones',
-      price: 59.99,
-      image: 'assets/products/headphone.png'
-    },
-    {
-      name: 'Smart Watch',
-      price: 129.99,
-      image: 'assets/products/watch.png'
-    },
-    {
-      name: 'Camera',
-      price: 499.99,
-      image: 'assets/products/camera.png'
-    },
-    {
-      name: 'Backpack',
-      price: 39.99,
-      image: 'assets/products/bag.png'
-    }
-  ];
+  products: Product[] = []
+
+  constructor(private productService: ProductService) {
+  }
+
+  ngOnInit(): void {
+    this.products = this.productService.getFeaturedProducts()
+  }
 }
