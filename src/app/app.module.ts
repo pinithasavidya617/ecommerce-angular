@@ -18,6 +18,7 @@ import { NewArrivalsComponent } from './components/new-arrivals/new-arrivals.com
 import { BestSellersComponent } from './components/best-sellers/best-sellers.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import {ShopModule} from "./modules/shop/shop.module";
+import {ShopService} from "./modules/shop/shop.service";
 
 @NgModule({
   declarations: [
@@ -39,10 +40,9 @@ import {ShopModule} from "./modules/shop/shop.module";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    ShopModule
+    MatIconModule
   ],
-  providers: [],
+  providers: [ ShopService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

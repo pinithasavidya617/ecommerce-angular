@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Product, ProductService} from "../../../../product.service";
+import {Product, ProductServiceService} from "../../../../product-service.service";
+import {ShopService} from "../../shop.service";
 
 @Component({
   selector: 'app-shop',
@@ -10,9 +11,15 @@ import {Product, ProductService} from "../../../../product.service";
 export class ShopComponent implements OnInit {
 
   displayProducts: Product[] = []
+  productServiceCounter = 0;
+  shopServiceCounter = 0;
 
-  constructor( private route: ActivatedRoute, private navigation: Router, private productService: ProductService) {
-  }ngOnDestroy() {
+  constructor(
+    private route: ActivatedRoute,
+    private navigation: Router,
+    private productService : ProductServiceService,
+    private shopService : ShopService
+  ) {
   }
 
   ngOnInit() {
@@ -23,22 +30,30 @@ export class ShopComponent implements OnInit {
       const minPrice = params['minPrice'];
       const maxPrice = params['maxPrice'];
 
-
       const filter = {
         category: category,
-        rating: rating,
+        rating: Number(rating),
         minPrice: Number(minPrice),
         maxPrice: Number(maxPrice),
       }
-
-      // http://localhost:4200/shop?maxPrice=50&minPrice=40
-      this.displayProducts = this.productService.getFilteredProducts(filter)
+      console.log( filter)
+      this.displayProducts =
+        this.productService.getFilteredProducts(filter);
     })
   }
 
   public navigateToProduct(id: number) {
-    // this.navigation.navigate(['/shop/product', 'furniture',id]);
-    this.navigation.navigate(['/shop/product',id]);
+    this.navigation.navigate(['/shop/product', 'furniture',id]);
+  }
 
+  public increment() {
+    this.productService.increaseCounter();
+    this.shopService.incrementCounter()
+  }
+
+  public update() {
+
+    this.productServiceCounter = this.productService.getCounter();
+    this.shopServiceCounter = this.shopService.getCounter();
   }
 }

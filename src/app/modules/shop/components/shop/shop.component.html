@@ -1,6 +1,17 @@
 <div class="top-header">
 
   <div>
+    <span>Product Service Counter = {{ productServiceCounter }}</span>
+  </div>
+  <div>
+    <span>Shop Service Counter = {{ shopServiceCounter }}</span>
+  </div>
+
+  <button (click)="increment()">Click</button>
+
+  <button (click)="update()">Update</button>
+
+  <div>
     <h1>All Products</h1>
     <p>Showing 1–20 of 240 products</p>
   </div>

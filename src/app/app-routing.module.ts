@@ -8,12 +8,12 @@ import {ContactUsComponent} from "./components/contact-us/contact-us.component";
 
 const routes: Routes = [
   { path :'' , component : DashboardComponent},
-  { path :'shop' , loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule) },//path to a module
-  { path :'deals' , component : DealsComponent},
+  { path :'shop' , loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule) },
+  { path :'deals' , loadChildren: () => import('./modules/deals/deals.module').then(m => m.DealsModule)},
   { path :'new-arrivals' , component : NewArrivalsComponent},
   { path :'best-sellers' , component : BestSellersComponent},
   { path :'contact-us' , component : ContactUsComponent},
-  {path: '**', redirectTo:''} //wildcard
+  { path :'**' , redirectTo: ''}
 ];
 
 @NgModule({
