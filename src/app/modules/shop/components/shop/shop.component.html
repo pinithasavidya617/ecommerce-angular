@@ -7,10 +7,6 @@
     <span>Shop Service Counter = {{ shopServiceCounter }}</span>
   </div>
 
-  <button (click)="increment()">Click</button>
-
-  <button (click)="update()">Update</button>
-
   <div>
     <h1>All Products</h1>
     <p>Showing 1–20 of 240 products</p>
@@ -58,24 +54,24 @@
     *ngFor="let product of displayProducts"
   >
 
-        <span
-          class="tag"
-          *ngIf="product.tag"
-        >
-          {{ product.tag }}
-        </span>
+<!--        <span-->
+<!--          class="tag"-->
+<!--          *ngIf="product.tag"-->
+<!--        >-->
+<!--          {{ product.tag }}-->
+<!--        </span>-->
 
     <button class="wishlist">
       <mat-icon>favorite_border</mat-icon>
     </button>
 
     <img
-      (click)="navigateToProduct(product.id)"
-      [src]="product.image"
-      [alt]="product.name"
+      (click)="navigateToProduct(product)"
+      [src]="product.thumbnail"
+      [alt]="product.title"
     >
 
-    <h4>{{ product.name }}</h4>
+    <h4>{{ product.title}}</h4>
 
     <div class="rating">
       ★★★★☆
@@ -88,9 +84,9 @@
             ${{ product.price }}
           </span>
 
-      <span class="old-price">
-            ${{ product.oldPrice }}
-          </span>
+<!--      <span class="old-price">-->
+<!--            ${{ product.oldPrice }}-->
+<!--          </span>-->
 
     </div>
 

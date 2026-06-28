@@ -1,23 +1,18 @@
 <div
   class="product-card">
 
-        <span
-          class="tag"
-          *ngIf="product.tag"
-        >
-          {{ product.tag }}
-        </span>
+
 
   <button class="wishlist">
     <mat-icon>favorite_border</mat-icon>
   </button>
 
   <img
-    [src]="product.image"
-    [alt]="product.name"
+    [src]="product.thumbnail"
+    [alt]="product.title"
   >
 
-  <h4>{{ product.name }}</h4>
+  <h4>{{ product.title }}</h4>
 
   <div class="rating">
     ★★★★☆
@@ -30,9 +25,6 @@
             ${{ product.price }}
           </span>
 
-    <span class="old-price">
-            ${{ product.oldPrice }}
-          </span>
 
   </div>
 

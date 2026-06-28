@@ -24,7 +24,6 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       const category = params['category'];
       const rating = params['rating'];
       const minPrice = params['minPrice'];
@@ -36,14 +35,14 @@ export class ShopComponent implements OnInit {
         minPrice: Number(minPrice),
         maxPrice: Number(maxPrice),
       }
-      console.log( filter)
-      this.displayProducts =
-        this.productService.getFilteredProducts(filter);
+      this.productService.getProductsByCategory(category).subscribe((response: any) => {
+        this.displayProducts = response;
+      })
     })
   }
 
-  public navigateToProduct(id: number) {
-    this.navigation.navigate(['/shop/product', 'furniture',id]);
+  public navigateToProduct(product: Product) {
+    this.navigation.navigate(['/shop/product', product.id]);
   }
 
   public increment() {
