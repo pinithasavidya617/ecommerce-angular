@@ -2,7 +2,7 @@
 
 <form #productSetupForm="ngForm" (ngSubmit)="onSubmit(productSetupForm)">
 
-  <input id="title" name="title" required  [(ngModel)]="product.title" #title="ngModel"/>
+  <input appCustomValidation id="title" name="title"   [(ngModel)]="product.title" #title="ngModel"/>
   <input id="description" name="description" required  ngModel #description="ngModel"/>
 
   <select  id="category" name="category" ngModel #category="ngModel" required>
@@ -39,15 +39,42 @@
     </p>
 
     <div ngModelGroup="address">
-      <input id="no" name="no" required  placeholder="no"  ngModel #supplierAddressNo="ngModel"/>
-      <p *ngIf="supplierAddressNo.touched && supplierAddressNo.invalid">
-        Supplier Address No is Required
-      </p>
-      <input id="street" name="street" required  placeholder="street" ngModel #street="ngModel"/>
-      <input id="city" name="city" required   placeholder="city"  ngModel #city="ngModel"/>
-      <input id="country" name="country" required  ngModel #country="ngModel"/>
+<!--      <input id="no" name="no" required  placeholder="no"  ngModel #supplierAddressNo="ngModel"/>-->
+<!--      <p *ngIf="supplierAddressNo.touched && supplierAddressNo.invalid">-->
+<!--        Supplier Address No is Required-->
+<!--      </p>-->
+<!--      <input id="street" name="street" required  placeholder="street" ngModel #street="ngModel"/>-->
+<!--      <input id="city" name="city" required   placeholder="city"  ngModel #city="ngModel"/>-->
+<!--      <input id="country" name="country" required  ngModel #country="ngModel"/>-->
+
+<!--      <div *ngFor="let productSkill: Skill of product.skills; index as index">-->
+<!--        <input required-->
+<!--          [minlength]="5"-->
+<!--          [id]="'skill' + index"-->
+<!--          [name]="'skill' + index"-->
+<!--          [(ngModel)]="productSkill.name"-->
+<!--          #skill="ngModel">-->
+
+<!--        <button type="button" (click)="removeSkill(index)">-->
+<!--          Remove-->
+<!--        </button>-->
+
+<!--        <p *ngIf="skill.invalid && skill.touched">-->
+<!--          Skill {{ index }} is Required-->
+<!--        </p>-->
+
+<!--      </div>-->
+
+      <button type="button" (click)="addSkill()">
+        Add
+      </button>
+
+      <button type="submit">
+        Submit
+      </button>
     </div>
   </div>
+
 
   <button type="submit">Submit</button>
 </form>
