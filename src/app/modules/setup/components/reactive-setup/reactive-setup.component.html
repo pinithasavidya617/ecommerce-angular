@@ -1,30 +1,84 @@
 <p>reactive-setup works!</p>
 
-<input [formControl]="nameField">
 
-<p>{{nameField.value}}</p>
+<input [formControl]="nameField" >
+
+
+<p>{{ nameField.value }}</p>
 <p *ngIf="nameField.invalid">
   <span *ngIf="nameField.hasError('required')">Name is required</span>
-  <span *ngIf="nameField.hasError('minlength')">Name is required min lenght 6</span>
+  <span *ngIf="nameField.hasError('minlength')">Name is required min length 6</span>
 </p>
 
+
 <form
-  [formGroup]="addressForm">
-  <label for="street"> Street</label>
-  <input id="street" type="text" formControlName="street" >
+  [formGroup]="addressForm"
+  (ngSubmit)="onSubmit()"
+>
 
-  <label for="city"> City</label>
-  <input id="city" type="text" formControlName="city" >
+  <label for="street">Street</label>
+  <input id="street" type="text" formControlName="street">
 
-  <label for="country"> County</label>
-  <input id="country" type="text" formControlName="country" >
 
-  <label for="zipcode"> ZipCode</label>
-  <input id="zipcode" type="text" formControlName="zipcode">
-  <p *ngIf="addressForm.controls?.zipcode?.invalid">
-    <span *ngIf="addressForm.controls?.zipcode?.hasError('required')">Name is required</span>
-    <span *ngIf="addressForm.controls?.zipcode?.hasError('maxlength')">Name is required max lenght 6</span>
+  <label for="city">City</label>
+  <input id="city" type="text" formControlName="city">
+
+  <label for="country">Country</label>
+  <input id="country" type="text" formControlName="country">
+
+  <label for="zip">Zip</label>
+  <input id="zip" type="text" formControlName="zip">
+  <p *ngIf="addressForm.controls?.zip?.invalid">
+    <span *ngIf="addressForm.controls?.zip?.hasError('required')">Zip is required</span>
+    <span *ngIf="addressForm.controls?.zip?.hasError('maxlength')">Zip max length 6</span>
   </p>
+
+  <button type="submit">Submit</button>
+</form>
+
+
+
+<form
+  [formGroup]="applicationForm"
+  (ngSubmit)="onSubmitApplication()"
+>
+  <label for="name">Name</label>
+  <input id="name" type="text" formControlName="name">
+
+  <label for="age">Age</label>
+  <input id="age" type="text" formControlName="age">
+
+  <div formGroupName="address">
+    <label for="street">Street</label>
+    <input id="street" type="text" formControlName="street">
+
+
+    <label for="city">City</label>
+    <input id="city" type="text" formControlName="city">
+
+    <label for="country">Country</label>
+    <input id="country" type="text" formControlName="country">
+
+    <label for="zip">Zip</label>
+    <input id="zip" type="text" formControlName="zip">
+    <p *ngIf="applicationForm.controls?.address?.controls?.zip?.invalid">
+      <span *ngIf="applicationForm.controls?.address?.controls?.zip?.hasError('required')">Zip is required</span>
+      <span *ngIf="applicationForm.controls?.address?.controls?.zip?.hasError('maxlength')">Zip max length 6</span>
+    </p>
+  </div>
+
+  <div formArrayName="skills">
+    <div *ngFor="let skill of getSkills(); index as index">
+      <div [formGroup]="skill">
+        <label [for]="'skillName_'+index">Name</label>
+        <input [id]="'skillName_'+index" type="text" formControlName="name">
+        <label [for]="'skillValue_'+index">Value</label>
+        <input [id]="'skillValue_'+index" type="text" formControlName="value">
+      </div>
+    </div>
+  </div>
+
+  <button type="button" (click)="addNewSkill()">Add New Skill</button>
 
   <button type="submit">Submit</button>
 </form>
