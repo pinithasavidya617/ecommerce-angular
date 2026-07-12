@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {parameterValidator} from "../../validations/parameter.validator";
+import {passwordStrengthValidator} from "../../validations/password-strength.validator";
 import {customValidator} from "../../validations/custom-reactive.validation";
 
 @Component({
@@ -47,10 +48,10 @@ export class ReactiveSetupComponent {
 
 
   studentFrom = this.fb.group({
-    firstName: ['', [Validators.required, customValidator] ], //Used custom-reacive.validator
+    firstName: ['', [Validators.required, customValidator] ], //USed custom-reactive.validator
     lastName: ['', Validators.required],
     email: ['', [ Validators.required, Validators.email , parameterValidator(["gmail" , "yahoo"]) ]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required , passwordStrengthValidator ]],
     address: this.fb.group({
       street: ['', Validators.required],
       city: ['', Validators.required],
@@ -110,6 +111,10 @@ export class ReactiveSetupComponent {
 
   addNewSkill() {
     this.applicationForm.controls.skills.push(this.createSkill());
+  }
+
+  get studentPassword() {
+    return this.studentFrom.get('password');
   }
 
 }
