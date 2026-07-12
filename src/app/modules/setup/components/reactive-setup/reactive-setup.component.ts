@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {parameterValidator} from "../../validations/parameter.validator";
 import {passwordStrengthValidator} from "../../validations/password-strength.validator";
 import {customValidator} from "../../validations/custom-reactive.validation";
+import {usernameValidator} from "../../validations/asynchronous.validator";
 
 @Component({
   selector: 'app-reactive-setup',
@@ -48,7 +49,15 @@ export class ReactiveSetupComponent {
 
 
   studentFrom = this.fb.group({
-    firstName: ['', [Validators.required, customValidator] ], //USed custom-reactive.validator
+    username: [
+      '',
+      {
+        validators: [Validators.required],
+        asyncValidators: [usernameValidator],
+        updateOn: 'blur'
+      }
+    ],
+    firstName: ['', [Validators.required, customValidator] ],
     lastName: ['', Validators.required],
     email: ['', [ Validators.required, Validators.email , parameterValidator(["gmail" , "yahoo"]) ]],
     password: ['', [Validators.required , passwordStrengthValidator ]],
@@ -115,6 +124,10 @@ export class ReactiveSetupComponent {
 
   get studentPassword() {
     return this.studentFrom.get('password');
+  }
+
+  get username() {
+    return this.studentFrom.get('username');
   }
 
 }
