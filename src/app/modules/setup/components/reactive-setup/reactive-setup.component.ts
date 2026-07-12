@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {parameterValidator} from "../../validations/parameter.validator";
 import {passwordStrengthValidator} from "../../validations/password-strength.validator";
+import {usernameExistsValidator} from "../../validations/username-check.validator";
+import {UserService} from "../../../../user-service.service";
 import {customValidator} from "../../validations/custom-reactive.validation";
-import {usernameValidator} from "../../validations/asynchronous.validator";
 
 @Component({
   selector: 'app-reactive-setup',
@@ -44,7 +45,8 @@ export class ReactiveSetupComponent {
   )
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService,
   ) { }
 
 
@@ -52,8 +54,8 @@ export class ReactiveSetupComponent {
     username: [
       '',
       {
-        validators: [Validators.required],
-        asyncValidators: [usernameValidator],
+        validators: [Validators.required, passwordStrengthValidator],
+        asyncValidators: [usernameExistsValidator(this.userService)],
         updateOn: 'blur'
       }
     ],
