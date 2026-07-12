@@ -5,8 +5,8 @@ import {SetupComponent} from "./components/setup/setup.component";
 import {ReactiveSetupComponent} from "./components/reactive-setup/reactive-setup.component";
 
 const routes: Routes = [
-  { path :'' , component : SetupComponent},
-  {path: 'reactive', component : ReactiveSetupComponent},
+  // { path :'' , component : SetupComponent},
+  {path: '', component : ReactiveSetupComponent},
   {path: '**', redirectTo: ''}
 ];
 

@@ -98,6 +98,33 @@
   <label for="password">Password</label>
   <input id="password" type="password" formControlName="password">
 
+  <p *ngIf="studentPassword?.errors?.['passwordStrength'] as error">
+
+  <span *ngIf="!error.hasUpperCase">
+    Must contain an uppercase letter
+  </span>
+
+    <br>
+
+    <span *ngIf="!error.hasLowerCase">
+    Must contain a lowercase letter
+  </span>
+
+    <br>
+
+    <span *ngIf="!error.hasNumber">
+    Must contain a number
+  </span>
+
+    <br>
+
+    <span *ngIf="!error.hasSpecialCharacters">
+    Must contain a special character (!@#$&^*)
+  </span>
+
+  </p>
+
+
   <div formGroupName="address">
     <label for="street">Street</label>
     <input id="street" type="text" formControlName="street">
