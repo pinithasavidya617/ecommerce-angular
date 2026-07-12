@@ -21,6 +21,7 @@ import {ShopModule} from "./modules/shop/shop.module";
 import {ShopService} from "./modules/shop/shop.service";
 import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.interceptor";
+import { BasicComponent } from './modules/rxjs/components/basic/basic.component';
 
 @NgModule({
   declarations: [

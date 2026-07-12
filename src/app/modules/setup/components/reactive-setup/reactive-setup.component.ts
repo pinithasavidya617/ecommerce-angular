@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {parameterValidator} from "../../validations/parameter.validator";
 import {passwordStrengthValidator} from "../../validations/password-strength.validator";
 import {usernameExistsValidator} from "../../validations/username-check.validator";
-import {passwordMatchValidator} from "../../validations/password-match-validator";
 import {customValidator} from "../../validations/custom-reactive.validation";
+import {passwordMatchValidator} from "../../validations/password-match-validator";
 import {UserService} from "../../../../user-service.service";
 
 @Component({
@@ -12,7 +12,7 @@ import {UserService} from "../../../../user-service.service";
   templateUrl: './reactive-setup.component.html',
   styleUrls: ['./reactive-setup.component.scss']
 })
-export class ReactiveSetupComponent {
+export class ReactiveSetupComponent implements OnInit {
 
   nameField = new FormControl(
     'Prashan', [Validators.required , Validators.minLength(6)]);
@@ -50,6 +50,43 @@ export class ReactiveSetupComponent {
     private userService: UserService,
   ) { }
 
+  ngOnInit(): void {
+
+    this.userService.userSubject.subscribe( value => {
+
+      console.log(value)
+    })
+
+    this.username?.valueChanges.subscribe(value => {
+      console.log(value)
+    })
+
+    this.nameField.valueChanges.subscribe(value => {
+      console.log(value)
+    })
+
+    this.nameField.statusChanges.subscribe(value => {
+      console.log(value)
+    })
+
+    this.nameField.removeValidators(Validators.required);
+
+    this.studentFrom.setValue({
+      username: 'john',
+      firstName: 'Prashan',
+      lastName: 'Silva',
+      email: 'prashansilva@gmail.com',
+      password: '1234',
+      confirmPassword: '1234',
+      address: {
+        street: 'a',
+        city: 'a',
+        country: 'a',
+        zip: '12500'
+      }
+    })
+  }
+
 
   studentFrom = this.fb.group(
     {
@@ -79,6 +116,7 @@ export class ReactiveSetupComponent {
       ]
     }
   )
+
 
   onSubmit() {
     this.addressForm.markAsTouched();
@@ -139,6 +177,10 @@ export class ReactiveSetupComponent {
 
   get username() {
     return this.studentFrom.get('username');
+  }
+
+  onStudentReset(): void {
+    this.studentFrom.reset();
   }
 
 }
